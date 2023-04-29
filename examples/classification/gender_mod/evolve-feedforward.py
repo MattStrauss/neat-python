@@ -12,8 +12,8 @@ import csv
 with open('data/gender.csv') as csvfile:
     csv_reader = csv.reader(csvfile)
     data = list(csv_reader)
-    node_names = {(i + 1) * -1: name for i, name in enumerate(data[0][:5])}
-    node_names.update({i: name for i, name in enumerate(data[0][5:])})
+    node_names = {(i + 1) * -1: name for i, name in enumerate(data[0][:4])}
+    node_names.update({i: name for i, name in enumerate(data[0][4:])})
     # remove the header from the data
     data = data[1:]
     num_rows = len(data)
