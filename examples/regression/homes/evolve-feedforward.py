@@ -22,8 +22,6 @@ with open('data/housing.csv') as csvfile:
     data = [[float(x) for x in row] for row in data]
     inputs = [row[:-1] for row in data]
     outputs = [row[-1] for row in data]
-    # get the average of the final column
-    average = sum(outputs) / len(outputs)
 
 
 def eval_genomes(genomes, config):
@@ -52,17 +50,17 @@ def run(config_file):
     p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 300 generations.
-    winner = p.run(eval_genomes, 300)
+    winner = p.run(eval_genomes, 1000)
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
 
     # Show output of the most fit genome against training data.
     print('\nOutput:')
-    winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
-    for xi, xo in zip(inputs, outputs):
-        output = winner_net.activate(xi)
-        print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
+    # winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    # for xi, xo in zip(inputs, outputs):
+    #     output = winner_net.activate(xi)
+    #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
 
     # visualize.draw_net(config, winner, True, node_names=node_names)
     visualize.draw_net(config, winner, True, node_names=node_names, prune_unused=True)
